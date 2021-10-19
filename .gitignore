@@ -8,3 +8,6 @@ tmp/boxes/*
 *.csv
 *.tif
 *.html
+*.gif
+!data/img/lightbox/*
+!data/img/overlays/*
