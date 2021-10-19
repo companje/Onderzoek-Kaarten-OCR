@@ -1,0 +1,275 @@
+/* Required height of parents of the Full Page Carousel for proper displaying carousel itself */
+html,
+body,
+.view {
+  height: 100%; }
+
+/* Full Page Carousel itself*/
+.carousel {
+  height: 100%; }
+  .carousel .carousel-inner {
+    height: 100%; }
+    .carousel .carousel-inner .carousel-item,
+    .carousel .carousel-inner .active {
+      height: 100%; }
+
+/* Navbar animation */
+.navbar {
+  background-color: rgba(0, 0, 0, 0.2); }
+
+.top-nav-collapse {
+  background-color: #1C2331; }
+
+/* Adding color to the Navbar on mobile */
+@media only screen and (max-width: 768px) {
+  .navbar {
+    background-color: #1C2331; } }
+
+/* Footer color for sake of consistency with Navbar */
+.page-footer {
+  background-color: #1C2331; }
+
+canvas {
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: -1000;
+}
+
+.grayeffect {
+  filter: gray; /* IE5+ */
+  -webkit-filter: grayscale(1); /* Webkit Nightlies & Chrome Canary */
+  -webkit-transition: all .2s; /* ease-in-out;  */
+}
+
+.grayeffect:hover {
+  filter: none;
+  -webkit-filter: grayscale(0);
+  -webkit-transform: scale(1.01);
+}
+
+.display-4 {
+  font-weight: bold;
+  background-color: rgba(0, 0, 0, 0.5);
+  padding-right: 5px;
+  padding-left: 5px;
+}
+
+.badge a {
+  color: black;
+  font-weight: normal;
+}
+
+.ricktitle {
+  padding-right: 5px;
+  padding-left: 5px;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  text-size-adjust: auto;
+}
+
+.overlay a {
+  color: white;
+}
+
+.card img[alt$="fullwidth"]{
+  width:  100%;
+  display: block;
+}
+
+body { 
+  background-color: white;
+  background: url('../img/bg.jpg') no-repeat center center fixed;
+  -moz-background-size: cover;
+  -webkit-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+.card .card-body p {
+  /*margin-bottom: 0px;*/
+}
+  
+/*@font-face {
+  font-family: 'Roboto Bold';
+  src: url('../font/roboto/Roboto-Bold.woff2') format('woff2'),
+       url('../font/roboto/Roboto-Bold.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'Roboto Regular';
+  src: url('../font/roboto/Roboto-Regular.woff2') format('woff2'),
+       url('../font/roboto/Roboto-Regular.woff') format('woff');
+}*/
+
+div.title {
+  margin-left: 20px;
+  margin-top: 20px;
+}
+
+div.title h2 {
+  margin-left: 20px;
+}
+/*
+div.title h1, div.title h2, .nameblock {
+  font-family: "Roboto Bold";
+}
+
+p.birthdeath {
+  font-family: "Roboto Regular";
+}
+
+*/
+
+.occupation {
+  font-style: italic;
+  font-weight: bold;
+}
+
+.nameblock h1 {
+  font-weight: bold;
+}
+
+.container p {
+  font-size: 1.2rem;
+}
+
+div.title h1, div.title h2 {
+  background-color: white;
+  display: inline-block;
+  margin-top: 0px;
+  margin-bottom: 0px;
+  padding: 2px 15px 2px 15px;
+}
+
+.thumb-post img {
+  object-fit: fit; /* Do not scale the image */
+  object-position: center; /* Center the image within the element */
+  width: 100%;
+  max-height: 250px;
+  /*margin-bottom: 1rem;*/
+}
+
+.card-body img {
+  object-fit: cover; /* Do not scale the image */
+  object-position: center; /* Center the image within the element */
+  width: 100%;
+  max-height: 250px;
+  /*margin-bottom: 1rem;*/
+}
+
+.date-block {
+  /*border-right: 1px solid black;*/
+}
+
+.day-item {
+  white-space: nowrap;
+}
+
+.card-body {
+  background-color: #eee;
+}
+.year-item {
+  font-size: 2rem;
+}
+a.lees-meer {
+  padding: 4px 10px 4px 10px;
+}
+
+.card-body a, a.lees-meer {
+  color: #427e74 !important;
+}
+
+/*.col-1 { border: 1px solid red }*/
+
+.vl {
+  border-left: 1px solid black;
+  height: 100%;
+  margin-left: 20px;
+}
+
+.item hr {
+  width: 50%;
+  border: 3px solid black;
+}
+
+.death-line {
+  background-color: white;
+  margin-bottom: 20px;
+}
+
+.item .vl {
+  border-left: 1px dashed black;
+
+}
+
+.dot {
+  /*border-left: 2px solid black;*/
+  /*height: 100%;*/
+  margin-left: 14px;
+  margin-top: 33px;
+  position: absolute;
+  background-color: white;
+  width: 14px;
+  height: 14px;
+  border-radius: 7px;
+  border: 1px solid black;
+}
+
+blockquote {
+  background-color: white;
+  font-style: italic;
+  padding: 10px 10px 10px 10px;
+}
+
+.date-block, .timeline-block {
+    background-color: white;
+}
+
+.item {
+  /*background-color: white;*/
+  /*background: rgba(255,255,255, 0.8) ;*/
+  /*, 0.3)*/
+
+  padding-bottom: 0px !important;
+  padding-top: 0px  !important;
+}
+
+/*.card {
+  background-color: red;
+  padding-bottom: 0px !important;
+  padding-top: 0px  !important;
+}*/
+
+.card {
+    /*background-color: red;*/
+  margin-bottom: 20px !important;
+  /*margin-top: 0px  !important;*/
+}
+
+.first-card {
+  /*margin-top: 20px !important;*/
+}
+
+.item textarea {
+  height: 200px;
+  width: 100%;
+  background-color: white;
+}
+
+.nameblock {
+  background-color: #cc0000;
+  color: white;
+}
+
+@media (max-width: 767px) {
+  footer .text-right { text-align:center }
+  h1 { font-size: x-large; }
+  .nameblock h1 { font-size: xx-large; }
+  h2 { font-size: large; }
+}
+
+.verstuur {
+  background-color: white;
+  margin-top: 10px;
+}

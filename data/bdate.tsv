@@ -1,0 +1,13 @@
+.*zor
+.*op
+^op
+^oo
+^l  1
+^B
+^[a-zA-Z]+
+^A
+Janueri	Januari
+mart	maart
+Oetoher	October
+Oetober	October
+^-r

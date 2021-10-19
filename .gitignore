@@ -1,0 +1,10 @@
+
+.DS_Store
+tmp/*
+tmp/boxes/*
+*.jpg
+*.png
+*.pdf
+*.csv
+*.tif
+*.html
