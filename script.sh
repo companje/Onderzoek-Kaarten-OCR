@@ -6,7 +6,7 @@ scriptdir=`dirname $0`
 jpg=$1
 base=tmp
 #`basename $jpg .jpg`
-psm=${2:-11}    # $2 parameter gets defaulted to 6
+psm=${2:-11}    # $2 parameter gets defaulted to 11
 
 echo $psm
 
@@ -15,7 +15,12 @@ cd $scriptdir   # important for Processing
 rm tmp/*
 rm tmp/boxes/*
 
-tesseract "$jpg" "tmp/$base" -l nld --dpi 300 --oem 1 --psm $psm \
+tesseract "$jpg" bw --dpi 300 get.images
+
+rm bw.txt
+mv tessinput.tif bw.tif
+
+tesseract bw.tif "tmp/$base" -l nld --dpi 300 --oem 1 --psm $psm \
 -c "tessedit_char_whitelist=0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz- " \
 -c "textord_blockndoc_fixed=1" \
 -c "textonly_pdf=1" \
@@ -27,6 +32,9 @@ tesseract "$jpg" "tmp/$base" -l nld --dpi 300 --oem 1 --psm $psm \
 -c "tessedit_create_wordstrbox=1" \
 -c "poly_debug=1" \
 get.images tsv pdf makebox > "tmp/$base.stdout" 2> "tmp/$base.stderr"
+
+rm bw.tif
+
 
 # -c "interactive_display_mode=1" \
 
