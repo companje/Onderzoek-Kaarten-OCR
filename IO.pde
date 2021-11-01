@@ -9,8 +9,9 @@ void keyPressed() {
   if (key=='l') loadSettings();
   if (key=='s') saveSettings();
   if (key=='e') startExport();
-  if (key=='r') ocr();
+  if (key=='r') ocrRandomOffset();
   if (key=='o') ocr();
+  if (key=='x') img.save("oddities/"+filenames[frame]);
 
   if (key==27) {
     stopExport();
