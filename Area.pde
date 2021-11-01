@@ -6,6 +6,10 @@ class Area extends Rectangle {
   Area(int x, int y, int w, int h) {
     super(x, y, w, h);
   }
+  
+  Area(Area a) {
+    super(a.x, a.y, a.width, a.height);
+  }
 
   void set(int x, int y) {
     this.x = x;
