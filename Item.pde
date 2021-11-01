@@ -10,6 +10,7 @@ class Item {
     this.w = row.getInt("width");
     this.h = row.getInt("height");
     this.text = row.getString("text");
+    this.conf = row.getInt("conf");
     this.left = x;
     this.top = y;
     this.right = x+w;
