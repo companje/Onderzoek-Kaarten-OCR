@@ -1,7 +1,7 @@
 import gab.opencv.*;
 import java.awt.Rectangle;
 OpenCV opencv;
-PImage img, debugImg, imgMarker3;
+PImage img, bw, debugImg, imgMarker3;
 ArrayList<Area> areas = new ArrayList();
 ArrayList<Line> vlines = new ArrayList();
 ArrayList<Item> items = new ArrayList();
@@ -11,8 +11,8 @@ boolean resizing, moving;
 String model = "";
 boolean exporting;
 PrintWriter csvExport;
-//OSX String folder = "/Users/rickcompanje/CBG/crop-breed-1000/";
-String folder = "z:\\CBG\\crop-breed-1000\\";
+String folder = "/Users/rickcompanje/CBG/crop-breed-1000/";
+//String folder = "z:\\CBG\\crop-breed-1000\\";
 String filenames[];
 int frame = 0;
 int saturation;
@@ -29,8 +29,8 @@ String fname, prefix="", sname, bdate, bplace;
 int bday, bmonth, byear;
 
 void setup() {
-  size(2800, 500);
-  opencv = new OpenCV(this, width, height);
+  size(2800, 1000);
+  opencv = new OpenCV(this, width, 500);
   frameRate(60);
   surface.setLocation(0, 0);
   textSize(fontSize);
@@ -41,7 +41,7 @@ void setup() {
   try {
     String lines[] = loadStrings("frame.txt");
     frame = int(lines[0]);
-    if (frame>=filenames.length) frame=0; 
+    if (frame>=filenames.length) frame=0;
   } 
   catch (Exception e) {
   }
@@ -61,6 +61,7 @@ void draw() {
 
   background(0);
   if (img!=null) image(img, 0, 0);
+  if (bw!=null) image(bw, 0, 500);
   if (debugImg!=null) image(debugImg, 0, 0);
 
   for (Line line : vlines) {
@@ -70,7 +71,7 @@ void draw() {
 
   for (Area area : areas) {
     //if (area.index<5) continue;
-    
+
     strokeWeight(area==selected ? 3 : 1);
     stroke(255);
     colorMode(HSB);
@@ -121,12 +122,13 @@ void draw() {
 
   if (drawItems) {
     stroke(255);
-    noFill();
     for (Item item : items) {
       //item.index/float(items.size())*255, 255, 255);
+      noFill();
       rect(item.x, item.y, item.w, item.h);
       textAlign(CENTER);
-      text(item.text, item.x+item.w/2, item.y+10+item.h/2);
+      fill(255, 255, 0);
+      text(item.text, item.x+item.w/2, item.y+10+item.h/2); //"\n(" + item.conf + ")"
       textAlign(LEFT);
     }
   }
@@ -157,13 +159,13 @@ void draw() {
 }
 
 void gotoFrame(int fr) {
-  frame = constrain(fr,0,filenames.length-1);
+  frame = constrain(fr, 0, filenames.length-1);
   resetOCR();
   load(folder+filenames[frame]);
 }
 
 void load(String s) {
-  println("load",s);
+  println("load", s);
   img = loadImage(s);
   findLines(); 
   detectModel();
@@ -200,7 +202,7 @@ void detectGeslacht() {
 
 void findLines() {
   //opencv.loadImage(img);
-  opencv = new OpenCV(this,img);
+  opencv = new OpenCV(this, img);
   opencv.blur(1);
   opencv.adaptiveThreshold(3, 4);
   //opencv.close(3);
@@ -234,19 +236,34 @@ void stopExport() {
   csvExport.close();
 }
 
-void ocr() {
- 
+void ocrRandomOffset() {
+  int maxRnd = 10; 
+  Area area = new Area(areas.get(AREA_OCR));
+  area.x += (int)random(-maxRnd,maxRnd);
+  area.y += (int)random(-maxRnd,maxRnd);
+  println(area);
+  ocrArea(area);
+}
+
+void ocr() { //default
+  ocrArea(areas.get(AREA_OCR));
+}
+
+void ocrArea(Area area) {
   println("ocr frame ", frame);
   resetOCR();
-  Area area = areas.get(AREA_OCR);
+  //Area area = areas.get(AREA_OCR);
   PImage crop = img.get(area.x, area.y, area.width, area.height);
   crop.save("crop.png");
-//OSX  String scriptPath = dataPath("script.sh").replace("data/", "");
-  
-  String scriptPath = dataPath("script.bat").replace("data\\", "");
+  String scriptPath = dataPath("script.sh").replace("data/", "");
+
+  //String scriptPath = dataPath("script.bat").replace("data\\", "");
   Process p = exec(scriptPath, "crop.png", psm+"");
   try {
     int result = p.waitFor();
+    
+    bw = loadImage("tmp/tmp_bw.png");
+    
     Table table = loadTable("tmp/tmp.tsv", "header, tsv");
     for (TableRow row : table.rows()) {
       int conf = row.getInt("conf");
