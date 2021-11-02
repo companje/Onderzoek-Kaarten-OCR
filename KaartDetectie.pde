@@ -128,7 +128,7 @@ void draw() {
       rect(item.x, item.y, item.w, item.h);
       textAlign(CENTER);
       fill(255, 255, 0);
-      text(item.text, item.x+item.w/2, item.y+10+item.h/2); //"\n(" + item.conf + ")"
+      text(item.text, item.x+item.w/2, item.y+10+item.h/2); //"\n(" + item.conf + ")"§
       textAlign(LEFT);
     }
   }
@@ -355,29 +355,38 @@ void applyRegexes(Area a, String filename) { //problem calling applyRegexes(Stri
     if (regex.isEmpty()) continue; //skip empty regex'es
     String by = (items.length==2) ? items[1] : "";
     a.text = a.text.replaceAll(regex, by);
+    a.text = trim(a.text); //do this after every step
+    //println(a.text);
   }
-  a.text = trim(a.text);
+  //a.text = trim(a.text);
 }
 
 void applyRegexes(String s, String filename) {
-  s = s.trim();
-  String lines[] = loadStrings(filename);
-  for (String line : lines) {
-    String items[] = split(line, "\t");
-    String regex = items[0];
-    String by = (items.length==2) ? items[1] : "";
-    s = s.replaceAll(regex, by);
-  }
-  s = trim(s);
+  println("Wordt applyRegexes(String s, String filename)  wel gebruikt?");
+  exit();
+  //s = s.trim();
+  //String lines[] = loadStrings(filename);
+  //for (String line : lines) {
+  //  String items[] = split(line, "\t");
+  //  String regex = items[0];
+  //  String by = (items.length==2) ? items[1] : "";
+  //  s = s.replaceAll(regex, by);
+  //  s = trim(s);
+  //  println(s);
+  //}
 }
 
 void updateTextFromItems(Area area, String filename) {
   area.text = "";
+  
+  /////ITEMS MOETEN NOG HORIZONTAAL GESORTEERD WORDEN
   for (Item item : items) {
     Rectangle t = new Rectangle(item.x, item.y, item.w, item.h);
     if (area.intersects(t)) {
       Rectangle i = area.intersection(t);
       float overlap = float(i.width*i.height)/(t.width*t.height);
+      
+      ///EN HIER OOK KIJKEN OF DE Y-COORD OVEREENKOMT MET DE ANDERE Y-COORDS
       if (overlap>.5) {
         //println(i, overlap, item.text);
         area.text += item.text + " ";
