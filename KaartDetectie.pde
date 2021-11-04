@@ -1,7 +1,7 @@
 import gab.opencv.*;
 import java.awt.Rectangle;
 OpenCV opencv;
-PImage img, bw, debugImg, imgMarker3;
+PImage img, bw, debugImg;
 ArrayList<Area> areas = new ArrayList();
 ArrayList<Line> vlines = new ArrayList();
 ArrayList<Item> items = new ArrayList();
@@ -35,7 +35,6 @@ void setup() {
   surface.setLocation(0, 0);
   textSize(fontSize);
   filenames = loadStrings("filenames.txt");
-  imgMarker3 = loadImage("3.jpg");
   loadSettings();
 
   try {
