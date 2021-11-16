@@ -13,6 +13,7 @@ boolean exporting;
 PrintWriter csvExport;
 String folder = "/Users/rickcompanje/CBG/crop-breed-1000/";
 //String folder = "z:\\CBG\\crop-breed-1000\\";
+String ocrEngine = "tesseract"; // "easyocr"
 String filenames[];
 int frame = 0;
 int saturation;
@@ -238,8 +239,8 @@ void stopExport() {
 void ocrRandomOffset() {
   int maxRnd = 10; 
   Area area = new Area(areas.get(AREA_OCR));
-  area.x += (int)random(-maxRnd,maxRnd);
-  area.y += (int)random(-maxRnd,maxRnd);
+  area.x += (int)random(-maxRnd, maxRnd);
+  area.y += (int)random(-maxRnd, maxRnd);
   println(area);
   ocrArea(area);
 }
@@ -252,17 +253,17 @@ void ocrArea(Area area) {
   println("ocr frame ", frame);
   resetOCR();
   //Area area = areas.get(AREA_OCR);
+  println(area.x, area.y, area.width, area.height);
+  
   PImage crop = img.get(area.x, area.y, area.width, area.height);
   crop.save("crop.png");
   String scriptPath = dataPath("script.sh").replace("data/", "");
-
   //String scriptPath = dataPath("script.bat").replace("data\\", "");
-  Process p = exec(scriptPath, "crop.png", psm+"");
+  Process p = exec(scriptPath, "crop.png", ocrEngine, psm+"");
   try {
     int result = p.waitFor();
-    
     bw = loadImage("tmp/tmp_bw.png");
-    
+
     Table table = loadTable("tmp/tmp.tsv", "header, tsv");
     for (TableRow row : table.rows()) {
       int conf = row.getInt("conf");
@@ -377,14 +378,14 @@ void applyRegexes(String s, String filename) {
 
 void updateTextFromItems(Area area, String filename) {
   area.text = "";
-  
+
   /////ITEMS MOETEN NOG HORIZONTAAL GESORTEERD WORDEN
   for (Item item : items) {
     Rectangle t = new Rectangle(item.x, item.y, item.w, item.h);
     if (area.intersects(t)) {
       Rectangle i = area.intersection(t);
       float overlap = float(i.width*i.height)/(t.width*t.height);
-      
+
       ///EN HIER OOK KIJKEN OF DE Y-COORD OVEREENKOMT MET DE ANDERE Y-COORDS
       if (overlap>.5) {
         //println(i, overlap, item.text);
@@ -407,4 +408,11 @@ boolean isOnBlacklist(Item item) {
     if (b.equals(s)) return true;
   }
   return false;
+}
+
+void saveCurrentFrameSettings() {
+  PrintWriter out = createWriter("frame.txt");
+  out.println(frame);
+  out.flush();
+  out.close();
 }

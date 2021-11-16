@@ -15,10 +15,7 @@ void keyPressed() {
 
   if (key==27) {
     stopExport();
-    PrintWriter out = createWriter("frame.txt");
-    out.println(frame);
-    out.flush();
-    out.close();
+    saveCurrentFrameSettings();
   }
 
   if (keyCode==RIGHT) { gotoFrame(frame+1); }

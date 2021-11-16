@@ -30,3 +30,22 @@ class Item {
     return x>=left && x<=right && y>=top && y<=bottom;
   }
 }
+
+//ArrayList<Item> loadItemsFromEasyOCR(String filename) {
+//  //([[13, 41], [37, 41], [37, 57], [13, 57]], 'Op', 0.8001253459596489)
+//  ArrayList<Item> items = new ArrayList();
+
+//  for (String s : loadStrings(filename)) {
+//    String elements[] = split(s, "]], ");
+//    String coords = elements[0];
+//    String rest[] = split(elements[1], ",");
+//    float conf = float(rest[1].replaceAll("\\)", ""));
+//    String text = rest[0].replaceAll("'", "");
+
+//    int c[] = int(split(coords.replaceAll("[\\[\\] \\(]", ""), ","));
+//    Rectangle r = new Rectangle(c[0], c[1], c[2]-c[0], c[7]-c[1]);
+//    items.add(new Item(r, text, conf));
+//  }
+
+//  return items;
+//}

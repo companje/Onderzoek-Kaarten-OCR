@@ -1,8 +1,9 @@
+z=$
+z_$
 ^\d		remove first digit
 ven de	van de
 mmm
 --
-^a
 ^je
 avan de	van de
 -e
@@ -11,4 +12,24 @@ avan de	van de
 ^[0-9]
 ^DD
 ^s
-Van  van
+^Van	van
+^vander	van der
+^van_der	van der
+^va der	van der
+^lan der	van der
+^Ian der	van der
+^vanA	van A
+^ven	van
+c$
+C$
+"
+ e$
+^an	van
+^a
+4$
+5o$
+\d$
+\[
+ a$
+Coa$
+7o$
