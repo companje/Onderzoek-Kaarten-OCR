@@ -1,30 +1,31 @@
 z=$
 z_$
 ^\d		remove first digit
-ven de	van de
 mmm
 --
 ^je
-avan de	van de
 -e
--
 ^LT
 ^[0-9]
 ^DD
 ^s
-^Van	van
-^vander	van der
-^van_der	van der
-^va der	van der
-^lan der	van der
+^an  van
 ^Ian der	van der
+^lan der	van der
+^va der	van der
+^Van	van
+^van_der	van der
 ^vanA	van A
+^vander	van der
 ^ven	van
+^Yan	van
+^yan	van
+avan de	van de
+ven de	van de
 c$
 C$
 "
  e$
-^an	van
 ^a
 4$
 5o$
